@@ -1,9 +1,10 @@
+import { Normal } from '@/constants/constant'
 import { Pressable, Text } from 'react-native'
 
-export default function CounterButton({props}) {
+export default function CounterButton({props, symbol}) {
   return (
     <Pressable onPress={props}>
-      <Text style={{fontSize: 30, padding: 5}}>+</Text>
+      <Normal > {symbol} </Normal>
     </Pressable>
   )
 }

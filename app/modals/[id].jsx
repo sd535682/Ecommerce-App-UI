@@ -3,14 +3,14 @@ import { View, Image, StyleSheet } from "react-native";
 import { Light } from "../../constants/constant";
 import ButtonComponent from "../../components/button";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/slices"
+import { addToCart } from "../../redux/slices";
 
 export default function PopupDetails() {
   const params = useLocalSearchParams();
   const router = useRouter();
   const details = JSON.parse(params.item);
 
-  function goBack(){
+  function goBack() {
     goback = router.back();
   }
 
@@ -26,7 +26,17 @@ export default function PopupDetails() {
           <Light numberOfLines={6}>{details.description}</Light>
         </View>
         <View style={styles.button_container}>
-            <ButtonComponent props={() => goBack()}/>
+          <ButtonComponent
+          text={"Add to Cart"}
+            color={"red"}
+            textColor={"white"}
+            onPress={() => counter(addItem({ productID: id, quantity: 1 }))}
+          />
+          <ButtonComponent
+            props={() => goBack()}
+            text={"Close"}
+            color={"lightgrey"}
+          />
         </View>
       </View>
     </View>
@@ -52,10 +62,10 @@ const styles = StyleSheet.create({
   },
   item_container: {
     flexDirection: "row",
-    gap: 10
+    gap: 10,
   },
   button_container: {
     flexDirection: "row",
-    gap: 10
-  }
+    gap: 10,
+  },
 });

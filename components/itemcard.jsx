@@ -52,10 +52,10 @@ export default function ItemCard({ item }) {
         </Light>
         <View style={styles.price_increment}>
           <Bold style={styles.card_price}>Rs. {price.toFixed(2)}</Bold>
-          <View>
-            <Counter props={handleDecrement} />
-            <Bold style={{ color: "black" }}>{itemCount}</Bold>
-            <Counter props={handleIncrement} />
+          <View style={styles.counter}>
+            <Counter props={handleDecrement} symbol={'-'}/>
+            <Normal style={{ color: "black" }}>{itemCount}</Normal>
+            <Counter props={handleIncrement} symbol={'+'}/>
           </View>
         </View>
         <Light style={styles.card_category}>Category: {category}</Light>
@@ -92,4 +92,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  counter: {
+    backgroundColor: 'lightgray',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 5,
+  }
 });
