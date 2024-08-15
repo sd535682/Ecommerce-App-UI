@@ -23,10 +23,11 @@ export const Light = ({ style, ...props }) => (
 const styles = StyleSheet.create({
   bold: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: '900',
   },
   normal: {
     fontSize: 18,
+    fontWeight: '500',
   },
   light: {
     fontSize: 15,

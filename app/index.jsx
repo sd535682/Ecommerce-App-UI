@@ -1,12 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
-// import { fetchAPI } from "../api/fakestore";
 import { useEffect, useState } from "react";
 import ItemList from "../components/itemlist";
-// import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
-  // const { top } = useSafeAreaInsets();
-  // const paddingTop = top > 0 ? top + 10 : top + 20;
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

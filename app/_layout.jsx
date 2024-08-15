@@ -1,17 +1,22 @@
 import { Stack } from "expo-router";
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: true }}>
-      <Stack.Screen
-        name="index"
-        options={{
-          title: "Shopping",
-          headerStyle: { backgroundColor: "lightblue" },
-          headerTitleStyle: { fontSize: 25, fontWeight: "bold" },
-          headerTitleAlign: "center",
-        }}
-      />
-    </Stack>
+    <Provider store={store}>
+      <Stack screenOptions={{ headerShown: true }}>
+        <Stack.Screen
+          name="index"
+          options={{
+            title: "Shopping",
+            headerStyle: { backgroundColor: "lightblue" },
+            headerTitleStyle: { fontSize: 25, fontWeight: "bold" },
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen name="modals/[id]" options={{ headerShown: false }} />
+      </Stack>
+    </Provider>
   );
 }
