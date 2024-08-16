@@ -9,6 +9,7 @@ export default function PopupDetails({ item, closeModal }) {
 
   const handleAddToCart = () => {
     addToCart(addItem({ productID: item.id, quantity: 1 }));
+    closeModal();
   };
 
   return (

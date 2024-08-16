@@ -5,8 +5,10 @@ import { useRouter } from "expo-router";
 import Counter from "./counter";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../redux/slices";
+import { useState, useEffect } from "react";
 
 export default function ItemCard({ item, handleModal }) {
+  const [showCounter, setShowCounter] = useState(false);
   const itemCount = useSelector((state) => {
     const cartItem = state.cart.items.find(
       (cartItem) => cartItem.productID === item.id
@@ -17,12 +19,25 @@ export default function ItemCard({ item, handleModal }) {
   const { id, title, image, category, price, rating, description } = item;
   const router = useRouter();
 
-  function handleIncrement () {
+  useEffect(() => {
+    if (itemCount > 0) {
+      setShowCounter(true);
+    } else {
+      setShowCounter(false);
+    }
+  }, [itemCount]);
+
+  function handleIncrement() {
     counter(addItem({ productID: id, quantity: 1 }));
-  };
+  }
 
   function handleDecrement() {
-    counter(removeItem({ productID: id }));
+    if (itemCount === 1) {
+      setShowCounter(false);
+      counter(removeItem({ productID: id }));
+    } else {
+      counter(removeItem({ productID: id }));
+    }
   }
 
   return (
@@ -43,11 +58,13 @@ export default function ItemCard({ item, handleModal }) {
         </Light>
         <View style={styles.price_increment}>
           <Bold style={styles.card_price}>Rs. {price.toFixed(2)}</Bold>
-          <View style={styles.counter}>
-            <Counter props={handleDecrement} symbol={'-'}/>
-            <Normal style={{ color: "black" }}>{itemCount}</Normal>
-            <Counter props={handleIncrement} symbol={'+'}/>
-          </View>
+          {showCounter && (
+            <View style={styles.counter}>
+              <Counter props={handleDecrement} symbol={"-"} />
+              <Normal style={{ color: "black" }}>{itemCount}</Normal>
+              <Counter props={handleIncrement} symbol={"+"} />
+            </View>
+          )}
         </View>
         <Light style={styles.card_category}>Category: {category}</Light>
       </View>
