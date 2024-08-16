@@ -6,7 +6,7 @@ import Counter from "./counter";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../redux/slices";
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, handleModal }) {
   const itemCount = useSelector((state) => {
     const cartItem = state.cart.items.find(
       (cartItem) => cartItem.productID === item.id
@@ -16,8 +16,6 @@ export default function ItemCard({ item }) {
   const counter = useDispatch();
   const { id, title, image, category, price, rating, description } = item;
   const router = useRouter();
-
-  console.log(itemCount);
 
   function handleIncrement () {
     counter(addItem({ productID: id, quantity: 1 }));
@@ -30,14 +28,7 @@ export default function ItemCard({ item }) {
   return (
     <Pressable
       style={styles.card_container}
-      onPress={() =>
-        router.push({
-          pathname: `modals/${item}`,
-          params: {
-            item: JSON.stringify(item),
-          },
-        })
-      }
+      onPress={() => handleModal(item)}
     >
       <Image
         source={{

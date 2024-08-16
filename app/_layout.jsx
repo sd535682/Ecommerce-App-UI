@@ -15,7 +15,6 @@ export default function RootLayout() {
             headerTitleAlign: "center",
           }}
         />
-        <Stack.Screen name="modals/[id]" options={{ headerShown: false }} />
       </Stack>
     </Provider>
   );
